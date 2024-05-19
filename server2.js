@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const HealthData = require('./health-data'); 
 
 const app = express();
-const port = 3022;
+const port = 3023;
 
 // Register the JSON helper
 Handlebars.registerHelper('json', function(context) {

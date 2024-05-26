@@ -9,7 +9,7 @@ const io = socketIo(server);
 const HealthData = require('./health-data');  
 require('./db');  
 
-app.use(express.static('public'));  
+app.use(express.static('.'));  
 
 io.on('connection', (socket) => {
     console.log('New client connected');

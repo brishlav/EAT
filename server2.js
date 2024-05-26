@@ -12,10 +12,7 @@ const io = socketIo(server);
 const port = process.env.PORT || 3023;
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://FYPUSERS:k1iTgwyFFzGlAkeN@fyptestdb.d7zdlnq.mongodb.net/TestAniket', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+mongoose.connect('mongodb+srv://FYPUSERS:k1iTgwyFFzGlAkeN@fyptestdb.d7zdlnq.mongodb.net/TestAniket')
     .then(() => console.log('MongoDB connected successfully!'))
     .catch(err => console.error('MongoDB connection error:', err));
 
@@ -30,18 +27,18 @@ app.get('/health-data', async (req, res) => {
     }
 });
 
-// Serve the index page
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// Serve the detailed health page
+// Serve the detailed health page from the root directory
 app.get('/detailHealth', (req, res) => {
     res.sendFile(path.join(__dirname, 'detailHealth.html'));
 });
 
+// Redirect root URL to /detailHealth
+app.get('/', (req, res) => {
+    res.redirect('/detailHealth');
+});
+
 // Set up static file serving
-app.use(express.static(path.join(__dirname)));
+app.use(express.static('.'));
 
 // Set up Socket.io connection
 io.on('connection', (socket) => {

@@ -30,3 +30,10 @@ function updateAccelerometerData(accelData) {
 socket.on('disconnect', () => {
     console.log('Disconnected from server');
 });
+
+document.getElementById('detail-link').addEventListener('click', () => {
+    const latestData = localStorage.getItem('latestHealthData');
+    if (latestData) {
+        localStorage.setItem('detailHealthData', latestData);
+    }
+});

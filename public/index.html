@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real-Time Health Data Display</title>
     <link rel="stylesheet" href="styles.css">
@@ -18,9 +18,11 @@
             <h2>Oxygen Saturation</h2>
             <p>Loading...</p>
         </div>
-        <div id="ouch-button" class="data-block">
-            <h2>Ouch Button</h2>
-            <p>Loading...</p>
+        <div id="accelerometer-data" class="data-block">
+            <h2>Accelerometer Data</h2>
+            <p>Ax: <span id="ax">Loading...</span></p>
+            <p>Ay: <span id="ay">Loading...</span></p>
+            <p>Az: <span id="az">Loading...</span></p>
         </div>
     </div>
     <script src="app.js"></script>

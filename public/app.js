@@ -6,32 +6,26 @@ socket.on('connect', () => {
 
 socket.on('healthDataUpdate', function(data) {
     console.log('Data received:', data);
-    if (data.healthData) {
-        updateData('heart-rate', data.healthData.heartRate, 'Heart Rate');
-        updateData('oxygen-saturation', data.healthData.oxygenSaturation, 'Oxygen Saturation');
-        updateData('ouch-button', data.healthData.ouchButton, 'Ouch Button');
+    if (data.HealthData) {
+        updateData('heart-rate', data.HealthData.HeartRate, 'Heart Rate');
+        updateData('oxygen-saturation', data.HealthData.OxygenLevel, 'Oxygen Saturation');
+        updateAccelerometerData(data.HealthData.AccelerometerData);
     }
 });
 
-function updateData(elementId, data, label) {
+function updateData(elementId, value, label) {
     const element = document.getElementById(elementId);
-    let content = '';
-
-    if (data) {
-        if (label === "Ouch Button") {
-            // Special formatting for Ouch Button
-            content = `<h2>${label}</h2><p>Frequency: ${data.frequency}</p><p>Last Pressed: ${data.lastPressed}</p>`;
-        } else {
-            // General formatting for other data types
-            content = `<h2>${label}</h2><p>Value: ${data.value} ${data.unit || ''}, Timestamp: ${data.timestamp}</p>`;
-        }
-    } else {
-        content = `<h2>${label}</h2><p>No data available.</p>`;
-    }
-
+    const content = `<h2>${label}</h2><p>Value: ${value}</p>`;
     element.innerHTML = content;
 }
 
+function updateAccelerometerData(accelData) {
+    if (accelData) {
+        document.getElementById('ax').textContent = accelData.Ax.toFixed(3);
+        document.getElementById('ay').textContent = accelData.Ay.toFixed(3);
+        document.getElementById('az').textContent = accelData.Az.toFixed(3);
+    }
+}
 
 socket.on('disconnect', () => {
     console.log('Disconnected from server');

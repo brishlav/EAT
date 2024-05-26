@@ -1,20 +1,15 @@
 const mongoose = require('mongoose');
 
 const healthDataSchema = new mongoose.Schema({
-    healthData: {
-        heartRate: {
-            value: Number,
-            unit: String,
-            timestamp: Date
-        },
-        oxygenSaturation: {
-            value: Number,
-            unit: String,
-            timestamp: Date
-        },
-        ouchButton: {
-            frequency: Number,
-            lastPressed: Date
+    DateTime: { type: Date, default: Date.now },
+    DeviceID: { type: String, required: true },
+    HealthData: {
+        HeartRate: { type: Number, required: true },
+        OxygenLevel: { type: Number, required: true },
+        AccelerometerData: {
+            Ax: { type: Number, required: true },
+            Ay: { type: Number, required: true },
+            Az: { type: Number, required: true }
         }
     }
 });
